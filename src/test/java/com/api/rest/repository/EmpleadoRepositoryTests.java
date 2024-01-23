@@ -2,6 +2,7 @@ package com.api.rest.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
+import static org.mockito.BDDMockito.given;
 
 import com.api.rest.entities.Empleado;
 import org.junit.jupiter.api.BeforeEach;
@@ -116,4 +117,7 @@ public class EmpleadoRepositoryTests {
 
         assertThat(empleadoOPTIONAL).isEmpty();
     }
+
+
+
 }

@@ -1,6 +1,8 @@
 package com.api.rest.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
+
 import com.api.rest.entities.Empleado;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class EmpleadoRepositoryTests {
@@ -93,10 +96,24 @@ public class EmpleadoRepositoryTests {
         empleadoSave.setApellido("Illoreno");
         Empleado empleadoUpdate = empleadoRepository.save(empleadoSave);
 
-        // given
+        // then
 
         assertThat(empleadoUpdate.getEmail()).isEqualTo("empleadillo@gmail.com");
         assertThat(empleadoUpdate.getNombre()).isEqualTo("empdillo");
     }
 
+    @Test
+    @DisplayName("Test para eliminar")
+    void testEliminarEmp(){
+        empleadoRepository.save(empleado1);
+
+        // when
+
+        empleadoRepository.deleteById((int) empleado1.getId());
+        Optional<Empleado> empleadoOPTIONAL = empleadoRepository.findById((int) empleado1.getId());
+
+        // then
+
+        assertThat(empleadoOPTIONAL).isEmpty();
+    }
 }
